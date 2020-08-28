@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'AdminController@viewManageArticle');
+Route::get('/addArticle', 'AdminController@viewAddArticle');
+Route::post('/addArticle', 'AdminController@addArticle');
