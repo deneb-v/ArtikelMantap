@@ -25,4 +25,8 @@ class Artikel extends Model
             'imageDesc' => $imageDesc
         ]);
     }
+
+    public static function getAllData(){
+        return Artikel::all();
+    }
 }

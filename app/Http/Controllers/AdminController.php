@@ -13,7 +13,8 @@ class AdminController extends Controller
 
     public function viewManageArticle()
     {
-        return view('adminView.manageArticle');
+        $data = Artikel::getAllData();
+        return view('adminView.manageArticle')->with('list',$data);
     }
 
     public function addArticle(Request $req){
