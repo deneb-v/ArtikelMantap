@@ -47,3 +47,11 @@
     </form>
 </div>
 @endsection
+
+@section('more-script')
+    $(document).ready(function() {
+        $('#txt_artContent').summernote({
+            height: 300
+        });
+    });
+@endsection

@@ -30,7 +30,7 @@
                     <td><img src="{{asset('img/'.$item->image)}}" alt="" srcset="" width="160px"></td>
                     <td>{{ $item->imageDesc }}</td>
                     <td>
-                        <p>{{$item->content}}</p>
+                        <p>{!!$item->content!!}</p>
                     </td>
                     <td><button type="button" name="" id="" class="btn btn-primary" btn-lg btn-block">Edit</button></td>
                     <td><button type="button" name="" id="" class="btn btn-danger" btn-lg btn-block">Delete</button>
