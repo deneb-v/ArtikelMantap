@@ -43,11 +43,9 @@ class AdminController extends Controller
         $title = $req->txt_title;
         $content = $req->txt_content;
         $writer = $req->txt_writer;
-        $file_img = $req->img_article;
-        $fileName = $file_img->getClientOriginalName();
-        $file_img->move('img', $fileName);
+        $path = $req->file('img_article')->store('img');
         $imgDesc = $req->txt_imgDesc;
-        Artikel::addArticle($title,$content,$writer,$fileName,$imgDesc);
-        return redirect("/addArticle")->with("success", "Article added successfuly!");
+        Artikel::addArticle($title,$content,$writer,$path,$imgDesc);
+        return redirect("/admin/addArticle")->with("success", "Article added successfuly!");
     }
 }

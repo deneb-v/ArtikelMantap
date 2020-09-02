@@ -3,6 +3,15 @@
     Add Article | Artikel Mantap
 @endsection
 
+@section('navItem')
+    <li class="nav-item">
+        <a class="nav-link" href="{{url('/admin')}}">Manage Article</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{url('/admin/addArticle')}}">Add Article </a>
+    </li>
+@endsection
+
 @section('content')
 <div class="container pt-2 pb-2">
     <h2>Add New Article</h2>
