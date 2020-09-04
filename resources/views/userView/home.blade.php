@@ -17,7 +17,7 @@
         <div class="row" id="art-img">
             <div class="col">
                 <div class="text-center">
-                    <img src="  "class="rounded" alt="...">
+                    <img src="{{ asset('storage/'.$art->image) }}"class="rounded" alt="...">
                     <p>{{ $art->imageDesc }}</p>
                 </div>
             </div>

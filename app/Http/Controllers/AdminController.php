@@ -17,6 +17,11 @@ class AdminController extends Controller
         return view('adminView.manageArticle')->with('list',$data);
     }
 
+    public function viewEditArticle($id){
+        $data = Artikel::findArticle($id);
+        return view('adminView.editArticle')->with('data',$data);
+    }
+
     public function addArticle(Request $req){
         $rules =[
             'txt_title' => 'required',
@@ -47,5 +52,32 @@ class AdminController extends Controller
         $imgDesc = $req->txt_imgDesc;
         Artikel::addArticle($title,$content,$writer,$path,$imgDesc);
         return redirect("/admin/addArticle")->with("success", "Article added successfuly!");
+    }
+
+    public function updateArticle($id, Request $req){
+        $rules =[
+            'txt_title' => 'required',
+            'txt_content' => 'required',
+            'txt_writer' => 'required',
+            'img_article' => 'image|mimes:jpeg,png',
+            'txt_imgDesc' => 'required'
+        ];
+        $attributes=[
+            'txt_title' => 'Article title',
+            'txt_content' => 'Article content',
+            'txt_writer' => 'Article writer',
+            'img_article' => 'Article image',
+            'txt_imgDesc' => 'Image description'
+        ];
+        $messages=[
+            'required' => ':attribute is required.',
+            'image' => ':attribute must be a image.',
+            'mimes' => ':attribute format must be :values.'
+        ];
+    }
+
+    public function deleteArticle($id){
+        Artikel::deleteArticle($id);
+        return back();
     }
 }

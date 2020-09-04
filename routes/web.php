@@ -18,3 +18,6 @@ Route::get('/','UserController@viewHome');
 Route::get('/admin', 'AdminController@viewManageArticle');
 Route::get('/admin/addArticle', 'AdminController@viewAddArticle');
 Route::post('/admin/addArticle', 'AdminController@addArticle');
+Route::get('/admin/delete/{id}','AdminController@deleteArticle')->where('id','[0-9]+');
+Route::get('/admin/edit/{id}', 'AdminController@viewEditArticle')->where('id','[0-9]+');
+

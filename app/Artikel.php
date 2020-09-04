@@ -29,4 +29,13 @@ class Artikel extends Model
     public static function getAllData(){
         return Artikel::all();
     }
+
+    public static function findArticle($id){
+        return Artikel::where("id",$id)->first();
+    }
+
+    public static function deleteArticle($id){
+        $data = Artikel::where('id',$id)->first();
+        $data->delete();
+    }
 }

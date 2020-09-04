@@ -19,6 +19,7 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Date Added</th>
+                <th scope="col">Writer</th>
                 <th scope="col">Title</th>
                 <th scope="col">Image</th>
                 <th scope="col">Image Description</th>
@@ -35,14 +36,15 @@
                 <tr>
                     <td scope="row">{{$item->id}}</td>
                     <td>{{ $item->updated_at }}</td>
+                    <td>{{ $item->writer }}</td>
                     <td>{{ $item->title }}</td>
-                    <td><img src="{{asset('/storage/'.$item->image)}}" alt="img" srcset="" width="160px"></td>
+                    <td><img src="{{asset('storage/'.$item->image)}}" alt="img" srcset="" width="160px"></td>
                     <td>{{ $item->imageDesc }}</td>
                     <td>
                         {!!$item->content!!}
                     </td>
-                    <td><button type="button" name="" id="" class="btn btn-primary" btn-lg btn-block">Edit</button></td>
-                    <td><button type="button" name="" id="" class="btn btn-danger" btn-lg btn-block">Delete</button>
+                    <td><a href="{{ url('admin/edit/'.$item->id) }}" class="btn btn-primary btn-block">Edit</a></td>
+                    <td><a href="{{ url('admin/delete/'.$item->id) }}" onclick="return confirm('Delete {{$item->title}} article?')" class="btn btn-danger btn-block">Delete</a>
                     </td>
                 </tr>
             @endforeach
