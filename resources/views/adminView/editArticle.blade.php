@@ -5,10 +5,10 @@
 
 @section('navItem')
     <li class="nav-item">
-        <a class="nav-link" href="{{url('/admin')}}">Manage Article</a>
+        <a class="nav-link" href="{{route('admin')}}">Manage Article</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{url('/admin/addArticle')}}">Add Article </a>
+        <a class="nav-link" href="{{route('newArticle')}}">Add Article </a>
     </li>
 @endsection
 
@@ -25,8 +25,9 @@
         </div>
     @endif
 
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('updateArticle',['id'=>$data->id]) }}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
+        @method('patch')
         {{-- 'title',
             'content',
             'writer',
@@ -56,7 +57,7 @@
             <label>Image Description</label>
             <input name="txt_imgDesc" type="text" class="form-control" id="txt_imgDesc" placeholder="Image Description" value="{{ $data->imageDesc }}">
         </div>
-        <button type="submit" name="" id="" class="btn btn-primary" btn-lg btn-block">Add Article</button>
+        <button type="submit" name="" id="" class="btn btn-primary" btn-lg btn-block">Update Article</button>
     </form>
 </div>
 @endsection

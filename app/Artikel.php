@@ -26,6 +26,16 @@ class Artikel extends Model
         ]);
     }
 
+    public static function updateArticle($id,$title, $content, $writer, $image, $imageDesc){
+        $data = Artikel::findArticle($id);
+        $data->title = $title;
+        $data->content = $content;
+        $data->writer = $writer;
+        $data->image=$image;
+        $data->imageDesc=$imageDesc;
+        $data->save();
+    }
+
     public static function getAllData(){
         return Artikel::all();
     }

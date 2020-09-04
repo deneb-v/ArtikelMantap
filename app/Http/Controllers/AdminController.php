@@ -74,10 +74,28 @@ class AdminController extends Controller
             'image' => ':attribute must be a image.',
             'mimes' => ':attribute format must be :values.'
         ];
+        $this->validate($req, $rules, $messages, $attributes);
+
+        $path = "";
+        if (empty($req->img_article)) {
+            $data = Artikel::findArticle($id);
+            $path = $data->image;
+        }
+        else{
+            $path = $req->file('img_article')->store('img');
+        }
+
+
+        $title = $req->txt_title;
+        $content = $req->txt_content;
+        $writer = $req->txt_writer;
+        $imgDesc = $req->txt_imgDesc;
+        Artikel::updateArticle($id,$title,$content,$writer,$path,$imgDesc);
+        return redirect('/admin')->with('success','Update article success!');
     }
 
     public function deleteArticle($id){
         Artikel::deleteArticle($id);
-        return back();
+        return redirect('/admin')->with('success','Delete article success!');
     }
 }

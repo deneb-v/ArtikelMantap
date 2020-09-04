@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','UserController@viewHome');
 
-Route::get('/admin', 'AdminController@viewManageArticle');
-Route::get('/admin/addArticle', 'AdminController@viewAddArticle');
-Route::post('/admin/addArticle', 'AdminController@addArticle');
-Route::get('/admin/delete/{id}','AdminController@deleteArticle')->where('id','[0-9]+');
-Route::get('/admin/edit/{id}', 'AdminController@viewEditArticle')->where('id','[0-9]+');
+Route::get('/admin', 'AdminController@viewManageArticle')->name('admin');
+Route::get('/admin/addArticle', 'AdminController@viewAddArticle')->name('newArticle');
+Route::post('/admin/addArticle', 'AdminController@addArticle')->name('addArticle');
+Route::delete('/admin/delete/{id}','AdminController@deleteArticle')->where('id','[0-9]+')->name('deleteArticle');
+Route::get('/admin/edit/{id}', 'AdminController@viewEditArticle')->where('id','[0-9]+')->name('edit');
+Route::patch('/admin/edit/{id}','AdminController@updateArticle')->where('id','[0-9]+')->name('updateArticle');
 

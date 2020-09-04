@@ -5,15 +5,20 @@
 
 @section('navItem')
     <li class="nav-item active">
-        <a class="nav-link" href="{{url('/admin')}}">Manage Article</a>
+        <a class="nav-link" href="{{route('admin')}}">Manage Article</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{url('/admin/addArticle')}}">Add Article </a>
+        <a class="nav-link" href="{{route('newArticle')}}">Add Article </a>
     </li>
 @endsection
 
 @section('content')
 <div class="container-fluid">
+    @if (Session::has('success'))
+        <div class="alert alert-success mt-3" role="alert">
+            {{Session::get('success')}}
+        </div>
+    @endif
     <table class="table">
         <thead>
             <tr>
@@ -43,8 +48,13 @@
                     <td>
                         {!!$item->content!!}
                     </td>
-                    <td><a href="{{ url('admin/edit/'.$item->id) }}" class="btn btn-primary btn-block">Edit</a></td>
-                    <td><a href="{{ url('admin/delete/'.$item->id) }}" onclick="return confirm('Delete {{$item->title}} article?')" class="btn btn-danger btn-block">Delete</a>
+                    <td><a href="{{ route('edit', ['id'=>$item->id]) }}" class="btn btn-primary btn-block">Edit</a></td>
+                    <td>
+                        <form action="{{ route('deleteArticle', ['id'=>$item->id]) }}" method="post">
+                            {{ csrf_field() }}
+                            @method('delete')
+                            <button onclick="return confirm('Delete {{$item->title}} article?')" class="btn btn-danger btn-block">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

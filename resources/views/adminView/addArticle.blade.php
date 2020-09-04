@@ -5,10 +5,10 @@
 
 @section('navItem')
     <li class="nav-item">
-        <a class="nav-link" href="{{url('/admin')}}">Manage Article</a>
+        <a class="nav-link" href="{{route('admin')}}">Manage Article</a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="{{url('/admin/addArticle')}}">Add Article </a>
+        <a class="nav-link" href="{{route('newArticle')}}">Add Article </a>
     </li>
 @endsection
 
@@ -30,7 +30,7 @@
             {{Session::get('success')}}
         </div>
     @endif
-    <form action="" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('addArticle') }}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="form-group">
             <label>Title</label>
