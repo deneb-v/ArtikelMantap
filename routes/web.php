@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','UserController@viewHome');
+Route::get('/','UserController@viewHome')->name('home');
+Route::get('/artikel/{id}','UserController@viewArtikel')->where('id','[0-9]+')->name('artikel');
 
 Route::get('/admin', 'AdminController@viewManageArticle')->name('admin');
 Route::get('/admin/addArticle', 'AdminController@viewAddArticle')->name('newArticle');

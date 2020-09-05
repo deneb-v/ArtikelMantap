@@ -40,6 +40,10 @@ class Artikel extends Model
         return Artikel::all();
     }
 
+    public static function pageAllData(){
+        return Artikel::paginate(4);
+    }
+
     public static function findArticle($id){
         return Artikel::where("id",$id)->first();
     }

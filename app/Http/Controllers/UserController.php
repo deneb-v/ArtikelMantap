@@ -7,11 +7,15 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-
-
     public function viewHome()
     {
-        $artikelList = Artikel::getAllData();
+        $artikelList = Artikel::pageAllData();
         return view('userView.home')->with('artikel',$artikelList);
+    }
+
+    public function viewArtikel($id)
+    {
+        $artikel = Artikel::findArticle($id);
+        return view('userView.article',['art'=>$artikel]);
     }
 }
