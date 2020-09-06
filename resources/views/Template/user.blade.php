@@ -11,11 +11,21 @@
   </head>
   <body>
     <div class="container-fluid p-0">
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4">Artikel Mantap</h1>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+            <a class="navbar-brand" href="{{ url('/') }}">Artikel Mantap</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                </ul>
+                <a class="btn btn-outline-primary mr-3" role="button" href="{{ route('login') }}">Login</a>
+                <a class="btn btn-success my-2 my-sm-0" role="button" href="{{ route('register') }}">Register</a>
             </div>
-        </div>
+        </nav>
     </div>
       @yield('content')
     <!-- Optional JavaScript -->

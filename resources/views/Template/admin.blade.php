@@ -23,6 +23,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         @yield('navItem')
+                    </ul>
+                    <a class="btn btn-outline-primary mr-3" role="button" href="{{ route('login') }}">Login</a>
+                    <a class="btn btn-success my-2 my-sm-0" role="button" href="{{ route('register') }}">Register</a>
                 </div>
             </nav>
         </div>

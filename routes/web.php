@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/login','AccountController@viewLogin')->name('login');
+Route::get('/register','AccountController@viewRegister')->name('register');
+
 Route::get('/','UserController@viewHome')->name('home');
 Route::get('/artikel/{id}','UserController@viewArtikel')->where('id','[0-9]+')->name('artikel');
+Route::post('/article/{id}/postComment','UserController@addComment')->where('id','[0-9]+')->name('postComment');
 
 Route::get('/admin', 'AdminController@viewManageArticle')->name('admin');
 Route::get('/admin/addArticle', 'AdminController@viewAddArticle')->name('newArticle');
