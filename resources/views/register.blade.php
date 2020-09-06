@@ -26,6 +26,10 @@
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control" id="txt_password">
                     </div>
+                    <div class="form-group mb-0">
+                        <label for="exampleInputPassword1">Confirm Password</label>
+                        <input type="password" class="form-control" id="txt_ConPassword">
+                    </div>
                     <small>Already have an account? </small> <a href="{{ route('login') }}" class="small">Log in here!</a>
                     <button type="submit" class="btn btn-outline-success btn-block mt-3">Register</button>
                   </form>
