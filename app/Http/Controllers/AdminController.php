@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Artikel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -82,6 +83,9 @@ class AdminController extends Controller
             $path = $data->image;
         }
         else{
+            $data = Artikel::findArticle($id);
+            $path = $data->image;
+            Storage::delete($path);
             $path = $req->file('img_article')->store('img');
         }
 
@@ -95,6 +99,9 @@ class AdminController extends Controller
     }
 
     public function deleteArticle($id){
+        $data = Artikel::findArticle($id);
+        $path = $data->image;
+        Storage::delete($path);
         Artikel::deleteArticle($id);
         return redirect('/admin')->with('success','Delete article success!');
     }
