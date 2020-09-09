@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Routing\RouteGroup;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,17 +15,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login','AccountController@viewLogin')->name('login');
-Route::get('/register','AccountController@viewRegister')->name('register');
-
 Route::get('/','UserController@viewHome')->name('home');
 Route::get('/artikel/{id}','UserController@viewArtikel')->where('id','[0-9]+')->name('artikel');
 Route::post('/article/{id}/postComment','UserController@addComment')->where('id','[0-9]+')->name('postComment');
+Route::post('/sendmail','UserController@sendMail')->name('sendMail');
 
-Route::get('/admin', 'AdminController@viewManageArticle')->name('admin');
-Route::get('/admin/addArticle', 'AdminController@viewAddArticle')->name('newArticle');
-Route::post('/admin/addArticle', 'AdminController@addArticle')->name('addArticle');
-Route::delete('/admin/delete/{id}','AdminController@deleteArticle')->where('id','[0-9]+')->name('deleteArticle');
-Route::get('/admin/edit/{id}', 'AdminController@viewEditArticle')->where('id','[0-9]+')->name('edit');
-Route::patch('/admin/edit/{id}','AdminController@updateArticle')->where('id','[0-9]+')->name('updateArticle');
 
+Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
+    Route::get('/', 'AdminController@viewManageArticle')->name('admin');
+    Route::get('/addArticle', 'AdminController@viewAddArticle')->name('newArticle');
+    Route::post('/addArticle', 'AdminController@addArticle')->name('addArticle');
+    Route::delete('/delete/{id}','AdminController@deleteArticle')->where('id','[0-9]+')->name('deleteArticle');
+    Route::get('/edit/{id}', 'AdminController@viewEditArticle')->where('id','[0-9]+')->name('edit');
+    Route::patch('/edit/{id}','AdminController@updateArticle')->where('id','[0-9]+')->name('updateArticle');
+});
+
+
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', 'HomeController@index')->name('home');

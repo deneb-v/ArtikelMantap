@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Artikel;
+use App\Jobs\ProcessMail;
 use App\Komentar;
+use App\Mail\SubscribeMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -46,5 +49,10 @@ class UserController extends Controller
 
         Komentar::addKomentar($id, $name, $comment);
         return back()->with('commentSuccess', 'Comment successfully submited');
+    }
+
+    public function sendMail(Request $req){
+        $this->dispatch(new ProcessMail($req->email));
+        return back();
     }
 }

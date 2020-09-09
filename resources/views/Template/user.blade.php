@@ -14,18 +14,6 @@
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
             <a class="navbar-brand" href="{{ url('/') }}">Artikel Mantap</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
-                <a class="btn btn-outline-primary mr-3" role="button" href="{{ route('login') }}">Login</a>
-                <a class="btn btn-success my-2 my-sm-0" role="button" href="{{ route('register') }}">Register</a>
-            </div>
         </nav>
     </div>
 
@@ -47,18 +35,19 @@
               </button>
             </div>
             <div class="modal-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('sendMail') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Email</label>
-                      <input type="text" class="form-control" id="recipient-name">
+                      <input type="text" class="form-control" id="email" name="email">
                     </div>
-                  </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Submit</button>
-            </div>
+
           </div>
         </div>
       </div>
