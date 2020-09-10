@@ -1,4 +1,13 @@
-@extends('layouts.app')
+@extends('Template.admin')
+
+@section('navItem')
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('admin')}}">Manage Article</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('newArticle')}}">Add Article </a>
+    </li>
+@endsection
 
 @section('content')
 <div class="container">
