@@ -10,14 +10,16 @@ class Komentar extends Model
     protected $primarykey = 'id';
     protected $fillable = [
         'id_article',
+        'id_user',
         'name',
         'comment'
     ];
 
-    static public function addKomentar($id_article, $nama, $comment)
+    static public function addKomentar($id_article, $id_user, $nama, $comment)
     {
         Komentar::create([
             'id_article'=>$id_article,
+            'id_user'=>$id_user,
             'name'=>$nama,
             'comment'=>$comment
         ]);
@@ -25,6 +27,14 @@ class Komentar extends Model
 
     static public function findKomentar($id){
         return Komentar::where("id_article",$id)->get();
+    }
+
+    public function article(){
+        return $this->hasOne('App\Artikel');
+    }
+
+    public function user(){
+        return $this->hasOne('App\User');
     }
 
 }

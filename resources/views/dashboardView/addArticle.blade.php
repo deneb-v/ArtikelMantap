@@ -1,4 +1,4 @@
-@extends('Template.admin')
+@extends('Template.user')
 @section('title')
     Add Article | Artikel Mantap
 @endsection

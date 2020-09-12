@@ -4,26 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Artikel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class AdminController extends Controller
+class DashboardController extends Controller
 {
     public function viewAddArticle(){
-        return view('adminView.addArticle');
+        return view('dashboardView.addArticle');
     }
 
     public function viewManageArticle()
     {
-        $data = Artikel::getAllData();
-        return view('adminView.manageArticle')->with('list',$data);
+        if (Auth::user()->role == 'admin') {
+            $data = Artikel::getAllData();
+        }
+        else{
+            //member
+        }
+        return view('dashboardView.manageArticle')->with('list',$data);
     }
 
     public function viewEditArticle($id){
         $data = Artikel::findArticle($id);
-        return view('adminView.editArticle')->with('data',$data);
+        return view('dashboardView.editArticle')->with('data',$data);
     }
 
-    public function addArticle(Request $req){
+    public function addArticle(Request $req,$id){
         $rules =[
             'txt_title' => 'required',
             'txt_content' => 'required',
@@ -49,9 +55,10 @@ class AdminController extends Controller
         $title = $req->txt_title;
         $content = $req->txt_content;
         $writer = $req->txt_writer;
+        $writer_id = $id;
         $path = $req->file('img_article')->store('img');
         $imgDesc = $req->txt_imgDesc;
-        Artikel::addArticle($title,$content,$writer,$path,$imgDesc);
+        Artikel::addArticle($title,$content,$writer,$writer_id,$path,$imgDesc);
         return redirect("/admin/addArticle")->with("success", "Article added successfuly!");
     }
 
@@ -94,7 +101,7 @@ class AdminController extends Controller
         $content = $req->txt_content;
         $writer = $req->txt_writer;
         $imgDesc = $req->txt_imgDesc;
-        Artikel::updateArticle($id,$title,$content,$writer,$path,$imgDesc);
+        Artikel::updateArticle($id,$title,$content,$path,$imgDesc);
         return redirect('/admin')->with('success','Update article success!');
     }
 

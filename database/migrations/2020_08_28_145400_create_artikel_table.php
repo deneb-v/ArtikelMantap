@@ -24,6 +24,7 @@ class CreateArtikelTable extends Migration
         Schema::create('artikel', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->foreignId('writer_id')->references('id')->on('users');
             $table->longText('content');
             $table->string('writer');
             $table->string('image');

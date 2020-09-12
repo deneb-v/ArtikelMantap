@@ -12,25 +12,30 @@ class Artikel extends Model
         'title',
         'content',
         'writer',
+        'writer_id',
         'image',
         'imageDesc'
     ];
 
-    public static function addArticle($title, $content, $writer, $image, $imageDesc){
+    public function writer(){
+        return $this->hasOne('App\user');
+    }
+
+    public static function addArticle($title, $content, $writer_id, $writer, $image, $imageDesc){
         Artikel::create([
             'title' => $title,
             'content' => $content,
             'writer' => $writer,
+            'writer_id' => $writer_id,
             'image' => $image,
             'imageDesc' => $imageDesc
         ]);
     }
 
-    public static function updateArticle($id,$title, $content, $writer, $image, $imageDesc){
+    public static function updateArticle($id,$title, $content, $image, $imageDesc){
         $data = Artikel::findArticle($id);
         $data->title = $title;
         $data->content = $content;
-        $data->writer = $writer;
         $data->image=$image;
         $data->imageDesc=$imageDesc;
         $data->save();
