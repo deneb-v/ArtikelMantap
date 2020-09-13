@@ -28,6 +28,13 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
     Route::get('/addArticle', 'DashboardController@viewAddArticle')->name('newArticle');
     Route::post('/addArticle/{id}', 'DashboardController@addArticle')->where('id','[0-9]+')->name('addArticle');
     Route::delete('/delete/{id}','DashboardController@deleteArticle')->where('id','[0-9]+')->name('deleteArticle');
+});
+
+Route::group(['middleware' => 'member','prefix' => 'member'], function () {
+    Route::get('/', 'DashboardController@viewManageArticle')->name('member');
+    Route::get('/addArticle', 'DashboardController@viewAddArticle')->name('newArticle');
+    Route::post('/addArticle', 'DashboardController@addArticle')->name('addArticle');
+    Route::delete('/delete/{id}','DashboardController@deleteArticle')->where('id','[0-9]+')->name('deleteArticle');
     Route::get('/edit/{id}', 'DashboardController@viewEditArticle')->where('id','[0-9]+')->name('edit');
     Route::patch('/edit/{id}','DashboardController@updateArticle')->where('id','[0-9]+')->name('updateArticle');
 });

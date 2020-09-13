@@ -17,6 +17,7 @@ class CreateKomentarsTable extends Migration
             $table->id();
             $table->foreignId('id_article')->references('id')->on('artikel');
             $table->foreignId('id_user')->references('id')->on('users');
+            $table->foreignId('id_user')->nullable()->constrained();
             $table->string('name');
             $table->string('comment');
             $table->timestamps();

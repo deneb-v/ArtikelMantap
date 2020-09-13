@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Artikel extends Model
 {
@@ -18,7 +19,11 @@ class Artikel extends Model
     ];
 
     public function writer(){
-        return $this->hasOne('App\user');
+        return $this->belongsTo('App\User','writer_id',);
+    }
+
+    public function komentar(){
+        return $this->hasMany('App\Komentar');
     }
 
     public static function addArticle($title, $content, $writer_id, $writer, $image, $imageDesc){

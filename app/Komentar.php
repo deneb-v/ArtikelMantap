@@ -30,11 +30,11 @@ class Komentar extends Model
     }
 
     public function article(){
-        return $this->hasOne('App\Artikel');
+        return $this->belongsTo('App\Artikel','id_article');
     }
 
     public function user(){
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\User','id_user');
     }
 
 }

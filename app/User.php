@@ -38,10 +38,10 @@ class User extends Authenticatable
     ];
 
     public function komentar(){
-        return $this->belongsTo('App\Komentar','id_user');
+        return $this->hasMany('App\Komentar','id_user','id');
     }
 
     public function artikel(){
-        return $this->belongsTo('App\Artikel','writer_id');
+        return $this->hasMany('App\Artikel','writer_id','id');
     }
 }

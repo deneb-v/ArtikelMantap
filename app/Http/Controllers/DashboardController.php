@@ -20,8 +20,11 @@ class DashboardController extends Controller
         }
         else{
             //member
+            $user = Auth::user();
+            // dd($user);
+            $data = $user->artikel;
         }
-        return view('dashboardView.manageArticle')->with('list',$data);
+        return view('dashboardView.manageArticle',['list'=>$data]);
     }
 
     public function viewEditArticle($id){
@@ -29,7 +32,7 @@ class DashboardController extends Controller
         return view('dashboardView.editArticle')->with('data',$data);
     }
 
-    public function addArticle(Request $req,$id){
+    public function addArticle(Request $req){
         $rules =[
             'txt_title' => 'required',
             'txt_content' => 'required',
@@ -55,7 +58,7 @@ class DashboardController extends Controller
         $title = $req->txt_title;
         $content = $req->txt_content;
         $writer = $req->txt_writer;
-        $writer_id = $id;
+        $writer_id = Auth::user()->id;
         $path = $req->file('img_article')->store('img');
         $imgDesc = $req->txt_imgDesc;
         Artikel::addArticle($title,$content,$writer,$writer_id,$path,$imgDesc);
