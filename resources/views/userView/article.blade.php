@@ -4,6 +4,8 @@
 @endsection
 
 @section('content')
+
+
     <div class="container pt-2" id="article">
         <div class="row" id="art-title">
             <div class="col text-center">
@@ -43,7 +45,11 @@
 
                 <div class="form-group">
                     <label>Name</label>
-                    <input name="txt_name" type="text" class="form-control" id="txt_name" placeholder="Title">
+                    @auth
+                        <input name="txt_name" type="text" class="form-control" id="txt_name" placeholder="Name" value="{{ Auth::user()->name }}">
+                    @else
+                        <input name="txt_name" type="text" class="form-control" id="txt_name" placeholder="Name">
+                    @endauth
                 </div>
                 <div class="form-group">
                     <label>Comment</label>
@@ -70,11 +76,77 @@
                     {{Session::get('commentSuccess')}}
                 </div>
             @endif
-            <div id="comment">
+            <div id="comments">
                 @forelse ($comment as $item)
                     <hr>
-                    <h5>{{ $item->name }}</h5>
-                    <p>{{ $item->comment }}</p>
+                    <div id="comment">
+                        <h5>{{ $item->name }}</h5>
+                        <p>{{ $item->comment }}</p>
+
+                        <div class="modal fade" id="modal_addReply{{$item->id}}" tabindex="-1" aria-labelledby="modal_addReply{{$item->id}}" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Reply Comment</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('postReply',$item->id) }}" method="POST" enctype="multipart/form-data">
+                                            {{ csrf_field() }}
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                @auth
+                                                    <input name="txt_name" type="text" class="form-control" id="txt_name" placeholder="Name" value="{{ Auth::user()->name }}">
+                                                @else
+                                                    <input name="txt_name" type="text" class="form-control" id="txt_name" placeholder="Name">
+                                                @endauth
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Comment</label>
+                                                <textarea class="form-control" id="txt_comment" name="txt_comment" rows="3"></textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Post Comment</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="action">
+                            <a data-toggle="collapse" href="#collapse{{$item->id}}" role="button" aria-expanded="false" aria-controls="collapse{{$item->id}}">Show Reply</a>
+                            <button type="button" class="btn btn-primary ml-3" data-toggle="modal" data-target="#modal_addReply{{$item->id}}">Reply</button>
+                        </div>
+
+                        <div class="collapse mt-3" id="collapse{{$item->id}}">
+                            <?php
+                                $counter = 0;
+                            ?>
+                            @foreach ($reply as $item2)
+                                @if ($item2->id_komentar == $item->id)
+                                    <div class="ml-5" id="reply">
+                                        <hr>
+                                        <h5>{{ $item2->name }}</h5>
+                                        <p>{{ $item2->comment }}</p>
+                                    </div>
+                                    <?php
+                                        $counter++;
+                                    ?>
+                                @endif
+                            @endforeach
+                            @if ($counter==0)
+                                <div class="ml-5">
+                                    <hr>
+                                    <p class="text-center">No reply</p>
+                                    <hr>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
                 @empty
                     <hr>
                     <p class="text-center">No comment</p>

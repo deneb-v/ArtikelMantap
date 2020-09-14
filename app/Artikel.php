@@ -23,7 +23,7 @@ class Artikel extends Model
     }
 
     public function komentar(){
-        return $this->hasMany('App\Komentar');
+        return $this->hasMany('App\Komentar','id_article');
     }
 
     public static function addArticle($title, $content, $writer_id, $writer, $image, $imageDesc){

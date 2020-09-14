@@ -4,11 +4,11 @@
 @endsection
 
 @section('navItem')
-    <li class="nav-item">
-        <a class="nav-link" href="{{route('admin')}}">Manage Article</a>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{route(Auth::user()->role)}}">Manage Article</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('newArticle')}}">Add Article </a>
+        <a class="nav-link" href="{{route('newArticle'.Auth::user()->role)}}">Add Article </a>
     </li>
 @endsection
 

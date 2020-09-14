@@ -5,10 +5,10 @@
 
 @section('navItem')
     <li class="nav-item active">
-        <a class="nav-link" href="{{route('admin')}}">Manage Article</a>
+        <a class="nav-link" href="{{route(Auth::user()->role)}}">Manage Article</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('newArticle')}}">Add Article </a>
+        <a class="nav-link" href="{{route('newArticle'.Auth::user()->role)}}">Add Article </a>
     </li>
 @endsection
 
@@ -32,11 +32,6 @@
             </tr>
         </thead>
         <tbody>
-            {{-- 'title',
-            'content',
-            'writer',
-            'image',
-            'imageDesc' --}}
             @foreach ($list as $item)
                 <tr>
                     <td scope="row">{{$item->id}}</td>
@@ -48,7 +43,9 @@
                     <td>
                         {!!$item->content!!}
                     </td>
-                    <td><a href="{{ route('edit', ['id'=>$item->id]) }}" class="btn btn-primary btn-block">Edit</a></td>
+                    @if (Auth::user()->id == $item->writer_id)
+                        <td><a href="{{ route('edit', ['id'=>$item->id]) }}" class="btn btn-primary btn-block">Edit</a></td>
+                    @endif
                     <td>
                         <form action="{{ route('deleteArticle', ['id'=>$item->id]) }}" method="post">
                             {{ csrf_field() }}
@@ -58,7 +55,6 @@
                     </td>
                 </tr>
             @endforeach
-
         </tbody>
     </table>
 </div>

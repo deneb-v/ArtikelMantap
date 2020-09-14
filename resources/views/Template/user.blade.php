@@ -32,10 +32,10 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            @if (Auth::user()->role == 'admin')
-                                <a class="dropdown-item" href="{{ route('admin') }}">{{ __('Manage Article') }}</a>
+                            @if (Auth::user()->role == 'Admin')
+                                <a class="dropdown-item" href="{{ route('Admin') }}">{{ __('Manage Article') }}</a>
                             @else
-                                <a class="dropdown-item" href="{{ route('member') }}">{{ __('Manage Article') }}</a>
+                                <a class="dropdown-item" href="{{ route('Member') }}">{{ __('Manage Article') }}</a>
                             @endif
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
@@ -62,30 +62,29 @@
 
     <div class="modal fade" id="modal_mail" tabindex="-1" aria-labelledby="modal_mail" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Subscription Mail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('sendMail') }}" method="POST" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Email</label>
+                            <input type="text" class="form-control" id="email" name="email">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="modal-body">
-                <form action="{{ route('sendMail') }}" method="POST" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <div class="form-group">
-                      <label for="recipient-name" class="col-form-label">Email</label>
-                      <input type="text" class="form-control" id="email" name="email">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-            </div>
-
-          </div>
         </div>
-      </div>
+    </div>
       @yield('content')
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

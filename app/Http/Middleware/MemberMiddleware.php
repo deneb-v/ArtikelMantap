@@ -17,7 +17,7 @@ class MemberMiddleware
     public function handle($request, Closure $next)
     {
         if (Auth::check()) {
-            if (Auth::user()->role != 'member') {
+            if (Auth::user()->role != 'Member') {
                 return redirect('/');
             }
         }

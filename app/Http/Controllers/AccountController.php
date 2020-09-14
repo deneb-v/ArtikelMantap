@@ -36,7 +36,7 @@ class AccountController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'type' => 'admin'
+            'role' => 'admin'
         ]);
     }
 
@@ -46,10 +46,8 @@ class AccountController extends Controller
 
         event(new Registered($user = $this->createAdmin($request->all())));
 
-        $this->guard()->login($user);
-
         return $request->wantsJson()
                     ? new JsonResponse([], 201)
-                    : redirect($this->redirectPath());
+                    : redirect('/admin');
     }
 }

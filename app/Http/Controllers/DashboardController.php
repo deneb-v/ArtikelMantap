@@ -15,7 +15,7 @@ class DashboardController extends Controller
 
     public function viewManageArticle()
     {
-        if (Auth::user()->role == 'admin') {
+        if (Auth::user()->role == 'Admin') {
             $data = Artikel::getAllData();
         }
         else{
@@ -61,8 +61,8 @@ class DashboardController extends Controller
         $writer_id = Auth::user()->id;
         $path = $req->file('img_article')->store('img');
         $imgDesc = $req->txt_imgDesc;
-        Artikel::addArticle($title,$content,$writer,$writer_id,$path,$imgDesc);
-        return redirect("/admin/addArticle")->with("success", "Article added successfuly!");
+        Artikel::addArticle($title,$content,$writer_id,$writer,$path,$imgDesc);
+        return back()->with("success", "Article added successfuly!");
     }
 
     public function updateArticle($id, Request $req){
@@ -105,7 +105,7 @@ class DashboardController extends Controller
         $writer = $req->txt_writer;
         $imgDesc = $req->txt_imgDesc;
         Artikel::updateArticle($id,$title,$content,$path,$imgDesc);
-        return redirect('/admin')->with('success','Update article success!');
+        return redirect('/member')->with('success','Update article success!');
     }
 
     public function deleteArticle($id){
@@ -113,6 +113,6 @@ class DashboardController extends Controller
         $path = $data->image;
         Storage::delete($path);
         Artikel::deleteArticle($id);
-        return redirect('/admin')->with('success','Delete article success!');
+        return back()->with('success','Delete article success!');
     }
 }

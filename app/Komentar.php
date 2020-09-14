@@ -37,4 +37,7 @@ class Komentar extends Model
         return $this->belongsTo('App\User','id_user');
     }
 
+    public function replyComment(){
+        return $this->hasMany('App\ReplyKomentar','id_komentar','id');
+    }
 }

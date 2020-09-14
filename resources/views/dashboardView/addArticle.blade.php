@@ -1,14 +1,14 @@
-@extends('Template.user')
+@extends('Template.admin')
 @section('title')
     Add Article | Artikel Mantap
 @endsection
 
 @section('navItem')
-    <li class="nav-item">
-        <a class="nav-link" href="{{route('admin')}}">Manage Article</a>
-    </li>
     <li class="nav-item active">
-        <a class="nav-link" href="{{route('newArticle')}}">Add Article </a>
+        <a class="nav-link" href="{{route(Auth::user()->role)}}">Manage Article</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{route('newArticle'.Auth::user()->role)}}">Add Article</a>
     </li>
 @endsection
 
@@ -30,7 +30,7 @@
             {{Session::get('success')}}
         </div>
     @endif
-    <form action="{{ route('addArticle') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('newArticle'.Auth::user()->role)}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="form-group">
             <label>Title</label>
