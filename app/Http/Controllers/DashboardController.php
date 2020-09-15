@@ -105,7 +105,7 @@ class DashboardController extends Controller
         $writer = $req->txt_writer;
         $imgDesc = $req->txt_imgDesc;
         Artikel::updateArticle($id,$title,$content,$path,$imgDesc);
-        return redirect('/member')->with('success','Update article success!');
+        return redirect('/'.Auth::user()->role)->with('success','Update article success!');
     }
 
     public function deleteArticle($id){

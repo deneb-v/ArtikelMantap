@@ -15,9 +15,19 @@ class CreateReplyKomentarsTable extends Migration
     {
         Schema::create('reply_komentars', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_komentar')->references('id')->on('komentars');
-            $table->foreignId('id_user')->references('id')->on('users');
-            $table->foreignId('id_user')->nullable()->constrained();
+
+            $table->foreignId('id_komentar')
+                ->references('id')
+                ->on('komentars')
+                ->onDelete('cascade');
+
+            $table->foreignId('id_user')
+                ->nullable()
+                ->references('id')
+                ->on('users')
+                ->constrained()
+                ->onDelete('cascade');
+
             $table->string('name');
             $table->string('comment');
             $table->timestamps();

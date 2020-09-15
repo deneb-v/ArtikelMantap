@@ -47,7 +47,7 @@
                         <td><a href="{{ route('edit', ['id'=>$item->id]) }}" class="btn btn-primary btn-block">Edit</a></td>
                     @endif
                     <td>
-                        <form action="{{ route('deleteArticle', ['id'=>$item->id]) }}" method="post">
+                        <form action="{{ route('deleteArticle'.Auth::user()->role, ['id'=>$item->id]) }}" method="post">
                             {{ csrf_field() }}
                             @method('delete')
                             <button onclick="return confirm('Delete {{$item->title}} article?')" class="btn btn-danger btn-block">Delete</button>

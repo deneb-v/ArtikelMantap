@@ -34,17 +34,6 @@ class ReplyKomentar extends Model
         return $data->get();
     }
 
-//     SELECT
-// 	rk.id_komentar,
-// 	rk.name,
-// 	rk.comment,
-// 	rk.id_user,
-// 	a.id
-// FROM artikel a
-// JOIN komentars k ON a.id=k.id_article
-// JOIN reply_komentars rk ON k.id=rk.id_komentar
-// WHERE a.id=1
-
     public function komentar(){
         return $this->belongsTo('App\Komentar','id_komentar');
     }

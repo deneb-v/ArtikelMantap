@@ -28,14 +28,14 @@ Route::group(['middleware' => 'admin','prefix' => 'admin'], function () {
     Route::post('/registerAdmin','AccountController@registerAdmin')->name('registerAdmin');
     Route::get('/addArticle', 'DashboardController@viewAddArticle')->name('newArticleAdmin');
     Route::post('/addArticle', 'DashboardController@addArticle')->name('addArticleAdmin');
-    Route::delete('/delete/{id}','DashboardController@deleteArticle')->where('id','[0-9]+')->name('deleteArticle');
+    Route::delete('/delete/{id}','DashboardController@deleteArticle')->where('id','[0-9]+')->name('deleteArticleAdmin');
 });
 
 Route::group(['middleware' => 'member','prefix' => 'member'], function () {
     Route::get('/', 'DashboardController@viewManageArticle')->name('Member');
     Route::get('/addArticle', 'DashboardController@viewAddArticle')->name('newArticleMember');
     Route::post('/addArticle', 'DashboardController@addArticle')->name('addArticleMember');
-    Route::delete('/delete/{id}','DashboardController@deleteArticle')->where('id','[0-9]+')->name('deleteArticle');
+    Route::delete('/delete/{id}','DashboardController@deleteArticle')->where('id','[0-9]+')->name('deleteArticleMember');
     Route::get('/edit/{id}', 'DashboardController@viewEditArticle')->where('id','[0-9]+')->name('edit');
     Route::patch('/edit/{id}','DashboardController@updateArticle')->where('id','[0-9]+')->name('updateArticle');
 });
