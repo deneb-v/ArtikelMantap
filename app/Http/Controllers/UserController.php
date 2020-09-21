@@ -19,6 +19,14 @@ class UserController extends Controller
         return view('userView.home')->with('artikel',$artikelList);
     }
 
+    public function apiGetArtikel(){
+        $artikel = Artikel::getAllData();
+        return response()->json([
+            'status' => '200',
+            'data' => $artikel
+        ]);
+    }
+
     public function viewArtikel($id)
     {
         $artikel = Artikel::findArticle($id);
